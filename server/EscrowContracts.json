@@ -1,0 +1,839 @@
+[
+  {
+    "id": 2,
+    "escrowContract": {
+      "target": "0x5eB2861d797ffCA0147F1437054a4fa076D66286",
+      "interface": {
+        "fragments": [
+          {
+            "type": "constructor",
+            "inputs": [
+              {
+                "name": "_client",
+                "type": "address",
+                "baseType": "address",
+                "components": null,
+                "arrayLength": null,
+                "arrayChildren": null
+              },
+              {
+                "name": "_freelancer",
+                "type": "address",
+                "baseType": "address",
+                "components": null,
+                "arrayLength": null,
+                "arrayChildren": null
+              },
+              {
+                "name": "_arbiter",
+                "type": "address",
+                "baseType": "address",
+                "components": null,
+                "arrayLength": null,
+                "arrayChildren": null
+              },
+              {
+                "name": "_token",
+                "type": "address",
+                "baseType": "address",
+                "components": null,
+                "arrayLength": null,
+                "arrayChildren": null
+              },
+              {
+                "name": "_submissionPeriodInDays",
+                "type": "uint256",
+                "baseType": "uint256",
+                "components": null,
+                "arrayLength": null,
+                "arrayChildren": null
+              }
+            ],
+            "payable": false,
+            "gas": null
+          },
+          {
+            "type": "event",
+            "inputs": [
+              {
+                "name": "client",
+                "type": "address",
+                "baseType": "address",
+                "indexed": true,
+                "components": null,
+                "arrayLength": null,
+                "arrayChildren": null
+              }
+            ],
+            "name": "DeliveryConfirmed",
+            "anonymous": false
+          },
+          {
+            "type": "event",
+            "inputs": [
+              {
+                "name": "client",
+                "type": "address",
+                "baseType": "address",
+                "indexed": true,
+                "components": null,
+                "arrayLength": null,
+                "arrayChildren": null
+              },
+              {
+                "name": "amount",
+                "type": "uint256",
+                "baseType": "uint256",
+                "indexed": false,
+                "components": null,
+                "arrayLength": null,
+                "arrayChildren": null
+              }
+            ],
+            "name": "Deposit",
+            "anonymous": false
+          },
+          {
+            "type": "event",
+            "inputs": [
+              {
+                "name": "freelancer",
+                "type": "address",
+                "baseType": "address",
+                "indexed": true,
+                "components": null,
+                "arrayLength": null,
+                "arrayChildren": null
+              },
+              {
+                "name": "amount",
+                "type": "uint256",
+                "baseType": "uint256",
+                "indexed": false,
+                "components": null,
+                "arrayLength": null,
+                "arrayChildren": null
+              }
+            ],
+            "name": "FundsReleased",
+            "anonymous": false
+          },
+          {
+            "type": "event",
+            "inputs": [
+              {
+                "name": "arbiter",
+                "type": "address",
+                "baseType": "address",
+                "indexed": true,
+                "components": null,
+                "arrayLength": null,
+                "arrayChildren": null
+              },
+              {
+                "name": "client",
+                "type": "address",
+                "baseType": "address",
+                "indexed": true,
+                "components": null,
+                "arrayLength": null,
+                "arrayChildren": null
+              },
+              {
+                "name": "amount",
+                "type": "uint256",
+                "baseType": "uint256",
+                "indexed": false,
+                "components": null,
+                "arrayLength": null,
+                "arrayChildren": null
+              }
+            ],
+            "name": "RefundIssued",
+            "anonymous": false
+          },
+          {
+            "type": "event",
+            "inputs": [
+              {
+                "name": "freelancer",
+                "type": "address",
+                "baseType": "address",
+                "indexed": true,
+                "components": null,
+                "arrayLength": null,
+                "arrayChildren": null
+              },
+              {
+                "name": "fileUrl",
+                "type": "string",
+                "baseType": "string",
+                "indexed": false,
+                "components": null,
+                "arrayLength": null,
+                "arrayChildren": null
+              }
+            ],
+            "name": "WorkSubmitted",
+            "anonymous": false
+          },
+          {
+            "type": "function",
+            "inputs": [],
+            "name": "amount",
+            "constant": true,
+            "outputs": [
+              {
+                "name": "",
+                "type": "uint256",
+                "baseType": "uint256",
+                "components": null,
+                "arrayLength": null,
+                "arrayChildren": null
+              }
+            ],
+            "stateMutability": "view",
+            "payable": false,
+            "gas": null
+          },
+          {
+            "type": "function",
+            "inputs": [],
+            "name": "arbiter",
+            "constant": true,
+            "outputs": [
+              {
+                "name": "",
+                "type": "address",
+                "baseType": "address",
+                "components": null,
+                "arrayLength": null,
+                "arrayChildren": null
+              }
+            ],
+            "stateMutability": "view",
+            "payable": false,
+            "gas": null
+          },
+          {
+            "type": "function",
+            "inputs": [],
+            "name": "client",
+            "constant": true,
+            "outputs": [
+              {
+                "name": "",
+                "type": "address",
+                "baseType": "address",
+                "components": null,
+                "arrayLength": null,
+                "arrayChildren": null
+              }
+            ],
+            "stateMutability": "view",
+            "payable": false,
+            "gas": null
+          },
+          {
+            "type": "function",
+            "inputs": [],
+            "name": "clientRating",
+            "constant": true,
+            "outputs": [
+              {
+                "name": "",
+                "type": "uint256",
+                "baseType": "uint256",
+                "components": null,
+                "arrayLength": null,
+                "arrayChildren": null
+              }
+            ],
+            "stateMutability": "view",
+            "payable": false,
+            "gas": null
+          },
+          {
+            "type": "function",
+            "inputs": [],
+            "name": "clientReview",
+            "constant": true,
+            "outputs": [
+              {
+                "name": "",
+                "type": "string",
+                "baseType": "string",
+                "components": null,
+                "arrayLength": null,
+                "arrayChildren": null
+              }
+            ],
+            "stateMutability": "view",
+            "payable": false,
+            "gas": null
+          },
+          {
+            "type": "function",
+            "inputs": [],
+            "name": "confirmDelivery",
+            "constant": false,
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "payable": false,
+            "gas": null
+          },
+          {
+            "type": "function",
+            "inputs": [],
+            "name": "currentState",
+            "constant": true,
+            "outputs": [
+              {
+                "name": "",
+                "type": "uint8",
+                "baseType": "uint8",
+                "components": null,
+                "arrayLength": null,
+                "arrayChildren": null
+              }
+            ],
+            "stateMutability": "view",
+            "payable": false,
+            "gas": null
+          },
+          {
+            "type": "function",
+            "inputs": [
+              {
+                "name": "_amount",
+                "type": "uint256",
+                "baseType": "uint256",
+                "components": null,
+                "arrayLength": null,
+                "arrayChildren": null
+              }
+            ],
+            "name": "deposit",
+            "constant": false,
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "payable": false,
+            "gas": null
+          },
+          {
+            "type": "function",
+            "inputs": [],
+            "name": "dispute",
+            "constant": true,
+            "outputs": [
+              {
+                "name": "raised",
+                "type": "bool",
+                "baseType": "bool",
+                "components": null,
+                "arrayLength": null,
+                "arrayChildren": null
+              },
+              {
+                "name": "reason",
+                "type": "string",
+                "baseType": "string",
+                "components": null,
+                "arrayLength": null,
+                "arrayChildren": null
+              },
+              {
+                "name": "evidence",
+                "type": "string",
+                "baseType": "string",
+                "components": null,
+                "arrayLength": null,
+                "arrayChildren": null
+              },
+              {
+                "name": "resolver",
+                "type": "address",
+                "baseType": "address",
+                "components": null,
+                "arrayLength": null,
+                "arrayChildren": null
+              }
+            ],
+            "stateMutability": "view",
+            "payable": false,
+            "gas": null
+          },
+          {
+            "type": "function",
+            "inputs": [],
+            "name": "disputeRaised",
+            "constant": true,
+            "outputs": [
+              {
+                "name": "",
+                "type": "bool",
+                "baseType": "bool",
+                "components": null,
+                "arrayLength": null,
+                "arrayChildren": null
+              }
+            ],
+            "stateMutability": "view",
+            "payable": false,
+            "gas": null
+          },
+          {
+            "type": "function",
+            "inputs": [],
+            "name": "fileHash",
+            "constant": true,
+            "outputs": [
+              {
+                "name": "",
+                "type": "bytes32",
+                "baseType": "bytes32",
+                "components": null,
+                "arrayLength": null,
+                "arrayChildren": null
+              }
+            ],
+            "stateMutability": "view",
+            "payable": false,
+            "gas": null
+          },
+          {
+            "type": "function",
+            "inputs": [],
+            "name": "fileUrl",
+            "constant": true,
+            "outputs": [
+              {
+                "name": "",
+                "type": "string",
+                "baseType": "string",
+                "components": null,
+                "arrayLength": null,
+                "arrayChildren": null
+              }
+            ],
+            "stateMutability": "view",
+            "payable": false,
+            "gas": null
+          },
+          {
+            "type": "function",
+            "inputs": [],
+            "name": "freelancer",
+            "constant": true,
+            "outputs": [
+              {
+                "name": "",
+                "type": "address",
+                "baseType": "address",
+                "components": null,
+                "arrayLength": null,
+                "arrayChildren": null
+              }
+            ],
+            "stateMutability": "view",
+            "payable": false,
+            "gas": null
+          },
+          {
+            "type": "function",
+            "inputs": [],
+            "name": "freelancerRating",
+            "constant": true,
+            "outputs": [
+              {
+                "name": "",
+                "type": "uint256",
+                "baseType": "uint256",
+                "components": null,
+                "arrayLength": null,
+                "arrayChildren": null
+              }
+            ],
+            "stateMutability": "view",
+            "payable": false,
+            "gas": null
+          },
+          {
+            "type": "function",
+            "inputs": [],
+            "name": "freelancerReview",
+            "constant": true,
+            "outputs": [
+              {
+                "name": "",
+                "type": "string",
+                "baseType": "string",
+                "components": null,
+                "arrayLength": null,
+                "arrayChildren": null
+              }
+            ],
+            "stateMutability": "view",
+            "payable": false,
+            "gas": null
+          },
+          {
+            "type": "function",
+            "inputs": [],
+            "name": "getClientRating",
+            "constant": true,
+            "outputs": [
+              {
+                "name": "",
+                "type": "uint256",
+                "baseType": "uint256",
+                "components": null,
+                "arrayLength": null,
+                "arrayChildren": null
+              },
+              {
+                "name": "",
+                "type": "string",
+                "baseType": "string",
+                "components": null,
+                "arrayLength": null,
+                "arrayChildren": null
+              }
+            ],
+            "stateMutability": "view",
+            "payable": false,
+            "gas": null
+          },
+          {
+            "type": "function",
+            "inputs": [],
+            "name": "getDisputeDetails",
+            "constant": true,
+            "outputs": [
+              {
+                "name": "",
+                "type": "bool",
+                "baseType": "bool",
+                "components": null,
+                "arrayLength": null,
+                "arrayChildren": null
+              },
+              {
+                "name": "",
+                "type": "string",
+                "baseType": "string",
+                "components": null,
+                "arrayLength": null,
+                "arrayChildren": null
+              },
+              {
+                "name": "",
+                "type": "string",
+                "baseType": "string",
+                "components": null,
+                "arrayLength": null,
+                "arrayChildren": null
+              },
+              {
+                "name": "",
+                "type": "address",
+                "baseType": "address",
+                "components": null,
+                "arrayLength": null,
+                "arrayChildren": null
+              }
+            ],
+            "stateMutability": "view",
+            "payable": false,
+            "gas": null
+          },
+          {
+            "type": "function",
+            "inputs": [],
+            "name": "getFileDetails",
+            "constant": true,
+            "outputs": [
+              {
+                "name": "",
+                "type": "string",
+                "baseType": "string",
+                "components": null,
+                "arrayLength": null,
+                "arrayChildren": null
+              },
+              {
+                "name": "",
+                "type": "bytes32",
+                "baseType": "bytes32",
+                "components": null,
+                "arrayLength": null,
+                "arrayChildren": null
+              }
+            ],
+            "stateMutability": "view",
+            "payable": false,
+            "gas": null
+          },
+          {
+            "type": "function",
+            "inputs": [],
+            "name": "getFreelancerRating",
+            "constant": true,
+            "outputs": [
+              {
+                "name": "",
+                "type": "uint256",
+                "baseType": "uint256",
+                "components": null,
+                "arrayLength": null,
+                "arrayChildren": null
+              },
+              {
+                "name": "",
+                "type": "string",
+                "baseType": "string",
+                "components": null,
+                "arrayLength": null,
+                "arrayChildren": null
+              }
+            ],
+            "stateMutability": "view",
+            "payable": false,
+            "gas": null
+          },
+          {
+            "type": "function",
+            "inputs": [],
+            "name": "getRemainingTime",
+            "constant": true,
+            "outputs": [
+              {
+                "name": "",
+                "type": "uint256",
+                "baseType": "uint256",
+                "components": null,
+                "arrayLength": null,
+                "arrayChildren": null
+              }
+            ],
+            "stateMutability": "view",
+            "payable": false,
+            "gas": null
+          },
+          {
+            "type": "function",
+            "inputs": [
+              {
+                "name": "_reason",
+                "type": "string",
+                "baseType": "string",
+                "components": null,
+                "arrayLength": null,
+                "arrayChildren": null
+              },
+              {
+                "name": "_evidence",
+                "type": "string",
+                "baseType": "string",
+                "components": null,
+                "arrayLength": null,
+                "arrayChildren": null
+              }
+            ],
+            "name": "raiseDispute",
+            "constant": false,
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "payable": false,
+            "gas": null
+          },
+          {
+            "type": "function",
+            "inputs": [
+              {
+                "name": "_rating",
+                "type": "uint256",
+                "baseType": "uint256",
+                "components": null,
+                "arrayLength": null,
+                "arrayChildren": null
+              },
+              {
+                "name": "_review",
+                "type": "string",
+                "baseType": "string",
+                "components": null,
+                "arrayLength": null,
+                "arrayChildren": null
+              }
+            ],
+            "name": "rateClient",
+            "constant": false,
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "payable": false,
+            "gas": null
+          },
+          {
+            "type": "function",
+            "inputs": [
+              {
+                "name": "_rating",
+                "type": "uint256",
+                "baseType": "uint256",
+                "components": null,
+                "arrayLength": null,
+                "arrayChildren": null
+              },
+              {
+                "name": "_review",
+                "type": "string",
+                "baseType": "string",
+                "components": null,
+                "arrayLength": null,
+                "arrayChildren": null
+              }
+            ],
+            "name": "rateFreelancer",
+            "constant": false,
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "payable": false,
+            "gas": null
+          },
+          {
+            "type": "function",
+            "inputs": [
+              {
+                "name": "_isClientCorrect",
+                "type": "bool",
+                "baseType": "bool",
+                "components": null,
+                "arrayLength": null,
+                "arrayChildren": null
+              }
+            ],
+            "name": "resolveDispute",
+            "constant": false,
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "payable": false,
+            "gas": null
+          },
+          {
+            "type": "function",
+            "inputs": [],
+            "name": "submissionDeadline",
+            "constant": true,
+            "outputs": [
+              {
+                "name": "",
+                "type": "uint256",
+                "baseType": "uint256",
+                "components": null,
+                "arrayLength": null,
+                "arrayChildren": null
+              }
+            ],
+            "stateMutability": "view",
+            "payable": false,
+            "gas": null
+          },
+          {
+            "type": "function",
+            "inputs": [
+              {
+                "name": "_fileUrl",
+                "type": "string",
+                "baseType": "string",
+                "components": null,
+                "arrayLength": null,
+                "arrayChildren": null
+              }
+            ],
+            "name": "submitWork",
+            "constant": false,
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "payable": false,
+            "gas": null
+          },
+          {
+            "type": "function",
+            "inputs": [],
+            "name": "token",
+            "constant": true,
+            "outputs": [
+              {
+                "name": "",
+                "type": "address",
+                "baseType": "address",
+                "components": null,
+                "arrayLength": null,
+                "arrayChildren": null
+              }
+            ],
+            "stateMutability": "view",
+            "payable": false,
+            "gas": null
+          }
+        ],
+        "deploy": {
+          "type": "constructor",
+          "inputs": [
+            {
+              "name": "_client",
+              "type": "address",
+              "baseType": "address",
+              "components": null,
+              "arrayLength": null,
+              "arrayChildren": null
+            },
+            {
+              "name": "_freelancer",
+              "type": "address",
+              "baseType": "address",
+              "components": null,
+              "arrayLength": null,
+              "arrayChildren": null
+            },
+            {
+              "name": "_arbiter",
+              "type": "address",
+              "baseType": "address",
+              "components": null,
+              "arrayLength": null,
+              "arrayChildren": null
+            },
+            {
+              "name": "_token",
+              "type": "address",
+              "baseType": "address",
+              "components": null,
+              "arrayLength": null,
+              "arrayChildren": null
+            },
+            {
+              "name": "_submissionPeriodInDays",
+              "type": "uint256",
+              "baseType": "uint256",
+              "components": null,
+              "arrayLength": null,
+              "arrayChildren": null
+            }
+          ],
+          "payable": false,
+          "gas": null
+        },
+        "fallback": null,
+        "receive": false
+      },
+      "runner": {
+        "provider": {},
+        "address": "0xeE206C66bA18253f04B35e8f8cBC2AA86f9e01aC"
+      },
+      "filters": {},
+      "fallback": null
+    }
+  }
+]
