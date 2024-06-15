@@ -31,6 +31,11 @@ function Pricing() {
 
   const [isApproved, setIsApproved] = useState(false);
 
+  const [disputeReason, setDisputeReason] = useState("");
+  const [disputeEvidence, setDisputeEvidence] = useState("");
+  const [disputeDetails, setDisputeDetails] = useState(null);
+  const [seeDispute, setSeeDispute] = useState(false);
+
   const arbiter = "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266";
   const freelanceContractAddress = state.freelanceContractAddress;
   const freelanceTokenContract = state.freelanceTokenContract;
@@ -204,36 +209,92 @@ function Pricing() {
     }
   };
 
-  // useEffect(()=>{
-  //   handleRetrieve()
-  // },[])
+  const handleRaiseDispute = async () => {
+    try {
+      const tx = await escrowContract.raiseDispute(
+        disputeReason,
+        disputeEvidence
+      );
+      await tx.wait();
+      alert("Dispute raised successfully");
+    } catch (error) {
+      console.error("Error raising dispute:", error);
+    }
+  };
+
+  const handleResolveDispute = async (isClientCorrect) => {
+    try {
+      const tx = await escrowContract.resolveDispute(isClientCorrect);
+      await tx.wait();
+      alert("Dispute resolved successfully");
+    } catch (error) {
+      console.error("Error resolving dispute:", error);
+    }
+  };
+
+  const fetchDisputeDetails = async () => {
+    const details = await escrowContract.getDisputeDetails();
+    setDisputeDetails(details);
+  };
+
+  const handleArbiter = () => {
+    setSeeDispute(true);
+  };
 
   return (
     <>
       {gigData && (
-        
         <div className="sticky flex flex-col top-36 mb-10 h-max w-96 gap-5">
-         {  
-         <div className="flex flex-col items-center justify-center">
-          <>
-          <button
-                className="w-[300px] flex items-center bg-[#1DBF73] text-white py-2 justify-center font-bold text-lg relative rounded"
-                onClick={handleRetrieve}
-              >
-                Get Escow Details
-            </button>
-            <p>Escrow Address : {escrowAddress}</p>
-          </>
+          {
+            <div className="flex flex-col items-center justify-center">
+              <>
+                <button
+                  className="w-[300px] flex items-center bg-[#1DBF73] text-white py-2 justify-center font-bold text-lg relative rounded"
+                  onClick={handleRetrieve}
+                >
+                  Get Escow Details
+                </button>
+                <p>Escrow Address : {escrowAddress}</p>
+              </>
 
-          <button className="w-[300px] flex items-center bg-[#1DBF73] text-white py-2 justify-center font-bold text-lg relative rounded" onClick={fetchFileDetails}>Get File Details</button>
-          {fileUrl && (
-            <div>
-              <p>fileUrl : {fileUrl}</p>
+              <button
+                className="w-[300px] flex items-center bg-[#1DBF73] text-white py-2 justify-center font-bold text-lg relative rounded"
+                onClick={fetchFileDetails}
+              >
+                Get File Details
+              </button>
+              {fileUrl && (
+                <div>
+                  <p>fileUrl : {fileUrl}</p>
+                </div>
+              )}
             </div>
-          )}
-         </div>
-         
           }
+
+          {currentAddress === arbiter && (
+            <button onClick={handleArbiter}>See Disputes</button>
+          )}
+
+          {seeDispute && (
+            <>
+              <h2 className="font-bold text-xl mb-2 ">Resolve Dispute</h2>
+            <div className="flex  gap-2">
+              <button
+                className="flex-1 py-2 px-4 bg-green-500 text-white font-semibold rounded-md hover:bg-green-600 transition duration-300"
+                onClick={() => handleResolveDispute(true)}
+              >
+                Resolve in Favor of Client
+              </button>
+              <button
+                className="flex-1 py-2 px-4 bg-green-500 text-white font-semibold rounded-md hover:bg-green-600 transition duration-300"
+                onClick={() => handleResolveDispute(false)}
+              >
+                Resolve in Favor of Freelancer
+              </button>
+            </div>
+            </>
+          )}
+
           <div className="border p-10 flex flex-col gap-5">
             <div className="flex justify-between">
               <h4 className="text-md font-normal text-[#74767e]">
@@ -288,8 +349,7 @@ function Pricing() {
               </button>
             )}
 
-            {
-              gigData.freelancerAddress == currentAddress && escrowAddress ? (
+            {gigData.freelancerAddress == currentAddress && escrowAddress ? (
               <>
                 <input
                   type="text"
@@ -307,9 +367,9 @@ function Pricing() {
                   {/* <BiRightArrowAlt className="text-2xl absolute right-4" /> */}
                 </button>
               </>
-
-              ):("")
-            }
+            ) : (
+              ""
+            )}
             {gigData.userId === userInfo.id && gigData.freelancerAddress ? (
               <p>
                 Request From :{" "}
@@ -330,13 +390,15 @@ function Pricing() {
                 className="flex items-center bg-[#1DBF73] text-white py-2 justify-center font-bold text-lg relative rounded"
                 onClick={handleApprove}
               >
-                {!isApproved? ("Approve") : ("Approved")}
+                {!isApproved ? "Approve" : "Approved"}
               </button>
             ) : (
               ""
             )}
 
-            {gigData.freelancerAddress && gigData.userId === userInfo.id && isApproved ? (
+            {gigData.freelancerAddress &&
+            gigData.userId === userInfo.id &&
+            isApproved ? (
               <button
                 className="flex items-center bg-[#1DBF73] text-white py-2 justify-center font-bold text-lg relative rounded"
                 onClick={deposit}
@@ -348,10 +410,59 @@ function Pricing() {
             )}
           </div>
 
-          {gigData.userId === userInfo.id && <div className="w-full flex flex-col items-center justify-center">
-            <h2 className="w-full m-auto font-bold mb-4">Confirm Delivery</h2>
-            <button className="w-[300px] flex items-center bg-[#1DBF73] text-white py-2 justify-center font-bold text-lg relative rounded" onClick={confirmDelivery}>Confirm Delivery</button>
-          </div>}
+          {gigData.userId === userInfo.id && (
+            <div className="w-full flex flex-col items-center justify-center">
+              <h2 className="w-full m-auto font-bold mb-4">Confirm Delivery</h2>
+              <button
+                className="w-[300px] flex items-center bg-[#1DBF73] text-white py-2 justify-center font-bold text-lg relative rounded"
+                onClick={confirmDelivery}
+              >
+                Confirm Delivery
+              </button>
+            </div>
+          )}
+          {gigData.userId === userInfo.id && (
+            <>
+              <h2 className="font-bold text-xl">Dispute section</h2>
+              <input
+                type="text"
+                className="border p-1"
+                value={disputeReason}
+                onChange={(e) => setDisputeReason(e.target.value)}
+                placeholder="Dispute Reason"
+              />
+              <input
+                type="text"
+                className="border p-1"
+                value={disputeEvidence}
+                onChange={(e) => setDisputeEvidence(e.target.value)}
+                placeholder="Dispute Evidence"
+              />
+              <button
+                className="bg-blue-500 p-2 font-bold text-white"
+                onClick={handleRaiseDispute}
+              >
+                Raise Dispute
+              </button>
+            </>
+          )}
+
+          <button
+            className="bg-green-500 p-2 font-bold text-white"
+            onClick={fetchDisputeDetails}
+          >
+            Get Dispute Details
+          </button>
+          {disputeDetails && (
+            <div>
+              <h3 className="">
+                Dispute Raised: {disputeDetails[0] ? "Yes" : "No"}
+              </h3>
+              <p>Reason: {disputeDetails[1]}</p>
+              <p>Evidence: {disputeDetails[2]}</p>
+              <p>Resolver: {disputeDetails[3]}</p>
+            </div>
+          )}
 
           {gigData.userId !== userInfo.id && (
             <div className="flex items-center justify-center mt-5">

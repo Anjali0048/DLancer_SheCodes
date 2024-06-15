@@ -2,7 +2,7 @@
   {
     "id": 2,
     "escrowContract": {
-      "target": "0x5eB2861d797ffCA0147F1437054a4fa076D66286",
+      "target": "0xFddffea736e7f0Ff47C60BC5DD677A0d28f4a2f7",
       "interface": {
         "fragments": [
           {
